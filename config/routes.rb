@@ -4,6 +4,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :mock_lists
   map.resources :projects, :member => {:mock_list_selector => :get}
   map.logout '/session/destroy', :controller => :sessions, :action => :destroy
+
+  map.devise_for :users
+
   map.resource  :session
   map.resources :settings, :collection => {:email => :get, :users => :get}
   map.resources :users
