@@ -2,9 +2,20 @@ class CreateUser < ActiveRecord::Migration
   def self.up
     create_table :users do |t|
       t.string   :name, :null => false, :default => ""
-      t.integer  :facebook_uid, :null => false
+      t.integer  :facebook_uid
       t.string   :email
+      t.string   :password
+      t.string   :salt
       t.boolean  :active, :default => true
+
+      # Devise options
+      t.database_authenticatable
+      t.confirmable
+      t.recoverable
+      t.rememberable
+      t.trackable
+      t.timestamps
+
 
       t.timestamps
     end
