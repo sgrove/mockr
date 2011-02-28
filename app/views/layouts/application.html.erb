@@ -36,6 +36,9 @@
     <% if !flash[:notice].blank? %>
       <div id="notice"><%= flash[:notice] %></div>
     <% end %>
+    <% if !flash[:alert].blank? %>
+      <div id="alert"><%= flash[:alert] %></div>
+    <% end %>
     <div class="clearfix" id="content">
       <%= yield %>
     </div>
