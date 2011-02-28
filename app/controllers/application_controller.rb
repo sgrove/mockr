@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   helper :all
 
-  before_filter :require_authorization
+  filter_parameter_logging :password
 
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
@@ -14,13 +14,6 @@ class ApplicationController < ActionController::Base
   def log_view
     if viewer.real? && @mock
       MockView.log_view(@mock, viewer)
-    end
-  end
-
-  def require_authorization
-    unless viewer.authorized?
-      #cookies[:redirect] = request.path
-      redirect_to new_session_path
     end
   end
 end
