@@ -9,10 +9,13 @@ class User < ActiveRecord::Base
 
   named_scope :active, :conditions => {:active => true}
 
-  validates_uniqueness_of :facebook_uid
+  devise :database_authenticatable, :confirmable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
-  def self.activate!(facebook_uid, name)
-    user = User.find_or_create_by_facebook_uid(facebook_uid)
+  validates_uniqueness_of :facebook_uid
+  validates_uniqueness_of :email
+
+  def self.activate!(email, name)
+    user = User.find_or_create_by_email(email)
     user.name = name
     user.active = true
     user.save
@@ -36,7 +39,7 @@ class User < ActiveRecord::Base
   end
 
   def authenticated?
-    !self.facebook_uid.blank?
+    !self.email.blank?
   end
 
   # Returns the set of comments that the user is interested in tracking
