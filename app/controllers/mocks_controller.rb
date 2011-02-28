@@ -1,4 +1,6 @@
 class MocksController < ApplicationController
+  before_filter :authenticate_user!
+
   def new
   end
 
@@ -17,7 +19,8 @@ class MocksController < ApplicationController
       mock.deliver(params[:email]) if params[:send_email].to_i == 1
       flash[:notice] = "Mock created!"
       redirect_to mock_path(mock)
-    rescue ActiveRecord::RecordInvalid
+    rescue ActiveRecord::RecordInvalid => error
+      logger.error error.inspect
       render :action => :new
     end
   end
