@@ -28,7 +28,7 @@
           <%= link_to "Home", home_path, :class => "home hoverable" %>
           <%= link_to "Settings", users_path, :class => "settings hoverable" %>
           <% if viewer %>
-            <%= logout_link("Sign out") %>
+            <%= link_to("Sign out", destroy_user_session_path) %>
           <% end %>
         </div>
       </div>

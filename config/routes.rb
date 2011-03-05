@@ -7,7 +7,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.devise_for :users
 
-  map.resource  :session
+  # map.resource  :session
   map.resources :settings, :collection => {:email => :get, :users => :get}
   map.resources :users
 

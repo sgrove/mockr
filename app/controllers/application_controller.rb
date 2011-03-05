@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  layout :layout_by_resource
 
   include Authentication
   helper_method :viewer
@@ -14,6 +15,15 @@ class ApplicationController < ActionController::Base
   def log_view
     if viewer.real? && @mock
       MockView.log_view(@mock, viewer)
+    end
+  end
+
+  def layout_by_resource
+    if devise_controller?
+      "devise"
+    else
+      "Something else"
+      "application"
     end
   end
 end

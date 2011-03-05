@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+  <head>
+    <%= stylesheet_link_tag "sessions/new" %>
+    <link rel="shortcut icon" href="/images/feelings/happy.gif" />
+    <title>Welcome to Mockr!</title>
+    <%= javascript_include_tag "jquery" %>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td id="left_col">
+          <%= image_tag("logo-large.png") %>
+        </td>
+        <td>
+          <%= yield %>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+
+
