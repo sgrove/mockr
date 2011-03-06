@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :confirmable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
-  validates_uniqueness_of :facebook_uid
+  # validates_uniqueness_of :facebook_uid
   validates_uniqueness_of :email
 
   def self.activate!(email, name)
