@@ -5,6 +5,7 @@ gem "devise", "1.0.9"
 gem 'aws-s3'
 gem 'mysql'
 gem 'pg'
+gem 'sqlite3'
 
 #group :development do
 #end
