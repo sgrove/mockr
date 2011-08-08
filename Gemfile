@@ -1,6 +1,7 @@
 source "http://rubygems.org"
 
-gem "rake", "0.8.7"
+gem "rake", "0.9.2"
+gem "rdoc", "2.4.3"
 gem "rails", "~> 2.3.5"
 
 gem "devise", "1.0.9"
