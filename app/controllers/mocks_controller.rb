@@ -5,7 +5,9 @@ class MocksController < ApplicationController
   end
 
   def create
+    puts "MOCK: #{params[:mock].inspect}"
     mock = Mock.new(params[:mock])
+
     if params[:project]
       if params[:project][:id].blank?
         project_id = Project.create_new_untitled_project!.id
@@ -14,6 +16,10 @@ class MocksController < ApplicationController
       end
       mock.attach_mock_list_if_necessary!(project_id)
     end
+    logger.debug "#x"*15
+    logger.debug "that's finished fine!"
+    logger.debug "#x"*15
+
     begin
       mock.save!
       mock.deliver(params[:email]) if params[:send_email].to_i == 1

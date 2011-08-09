@@ -9,10 +9,26 @@ class User < ActiveRecord::Base
 
   named_scope :active, :conditions => {:active => true}
 
-  devise :database_authenticatable, :confirmable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+  if on_bushido?
+    devise :bushido_authenticatable
+  else
+    devise :database_authenticatable,
+           # :confirmable,
+           # :registerable,
+           # :recoverable,
+           # :rememberable,
+           :trackable,
+           :validatable
+    
+    validates_uniqueness_of :email
+  end
 
-  # validates_uniqueness_of :facebook_uid
-  validates_uniqueness_of :email
+  # called only if hosted on Bushido by the auth library
+  def bushido_extra_attributes(extra_attributes)
+    puts "EXTRA ATTRIBS: #{extra_attributes.inspect}"
+    self.email = extra_attributes["email"]
+    self.name = extra_attributes["first_name"] + " " + extra_attributes["last_name"]
+  end
 
   def self.activate!(email, name)
     user = User.find_or_create_by_email(email)
