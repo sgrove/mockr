@@ -1,5 +1,7 @@
-PATH
-  remote: /Users/akashmanohar/code/devise_cas_authenticatable
+GIT
+  remote: http://github.com/Bushido/devise_cas_authenticatable.git
+  revision: 41f736fac543b993ed2874ade49aeca3eb84d754
+  branch: ido_fork
   specs:
     devise_bushido_authenticatable (1.0.0.alpha10)
       devise (>= 1.0.6)
