@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   named_scope :active, :conditions => {:active => true}
 
-  if on_bushido?
+  if Devise::on_bushido?
     devise :bushido_authenticatable
   else
     devise :database_authenticatable,

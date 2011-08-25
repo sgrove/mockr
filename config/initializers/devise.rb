@@ -4,7 +4,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in DeviseMailer.
   config.mailer_sender = ENV['SMTP_USER'] || "example@bushido-mockr.com"
 
-  if on_bushido?
+  if Devise::on_bushido?
     config.cas_base_url = "https://sandbox.auth.bushi.do/cas"
   end
 

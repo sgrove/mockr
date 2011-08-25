@@ -5,21 +5,16 @@ class CreateUser < ActiveRecord::Migration
       t.string   :email
       t.boolean  :active, :default => true
 
-      if on_bushido?
-        # Bushido auth fields
-        t.bushido_authenticatable
-      else
-        t.integer  :facebook_uid
-        t.string   :password
-        t.string   :salt
-      
-        # Devise options
-        t.database_authenticatable
-        t.confirmable
-        t.recoverable
-        t.rememberable
-        t.trackable
-      end
+      # Bushido auth fields
+      t.bushido_authenticatable
+      t.database_authenticatable
+      t.integer  :facebook_uid
+      t.string   :password
+      t.string   :salt
+      t.confirmable
+      t.recoverable
+      t.rememberable
+      t.trackable
 
       t.timestamps
     end
