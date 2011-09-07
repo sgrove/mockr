@@ -10,13 +10,13 @@ class User < ActiveRecord::Base
   named_scope :active, :conditions => {:active => true}
 
   if Devise::on_bushido?
-    devise :bushido_authenticatable
+    devise :bushido_authenticatable, :trackable
   else
     devise :database_authenticatable,
            # :confirmable,
-           # :registerable,
-           # :recoverable,
-           # :rememberable,
+           :registerable,
+           :recoverable,
+           :rememberable,
            :trackable,
            :validatable
     
