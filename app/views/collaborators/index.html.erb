@@ -1,0 +1,50 @@
+<%= stylesheet_link_tag "settings/users" %>
+
+<%= render :partial => "/shared/subnav",
+           :locals => {
+             :header => "Settings",
+             :links => [["Users", collaborators_path], ["Email", email_settings_path]]
+           } %>
+
+<div id="container">
+  <table>
+    <tr>
+      <th>Name</th>
+      <%- if Devise::on_bushido? %>
+        <th>Bushido ID</th>
+      <%- end %>
+      <th>Email</th>
+      <th></th>
+    </tr>
+    <% @users.each do |user| %>
+      <tr>
+        <td>
+          <%=h user.name %>
+        </td>
+        
+        <%- if Devise::on_bushido? %>
+          <td>
+            <%=h user.ido_id %>
+          </td>
+        <%- end %>
+        
+        <td>
+          <%= user.email %>
+        </td>
+        <td class="actions">
+          <% if viewer != user %>
+            <% #<span class="divider">|</span> <%= link_to "Remove",
+               #user_path(user, :user => {:active => :false}), :method => :put %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  
+  <div style="background: #2d2d2d; padding-bottom: 200px;">
+    <% form_tag collaborators_url, :target => "_top" do %>
+      <%= input :type=>"text", :name=>"email" %>
+      <%= submit_tag "Add" %>
+    <% end %>
+  </div>
+</div>
