@@ -5,7 +5,11 @@ Devise.setup do |config|
   config.mailer_sender = ENV['SMTP_USER'] || "example@bushido-mockr.com"
 
   if Devise::on_bushido?
-    config.cas_base_url = "https://sandbox.auth.bushi.do/cas"
+    if ENV['RAILS_ENV']=="development"
+      config.cas_base_url = "https://localhost:3001/cas"
+    else
+      config.cas_base_url = "https://sandbox.auth.bushi.do/cas"
+    end
   end
 
   # Configure the content type of DeviseMailer mails (defaults to text/html")

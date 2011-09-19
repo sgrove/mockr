@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/Bushido/devise_cas_authenticatable.git
+  revision: b76e04a13bd5ba63c4274b4ec8f941ff5a5eaaa8
+  specs:
+    devise_bushido_authenticatable (1.0.0)
+      devise
+      devise (>= 1.0.6)
+      rubycas-client (>= 2.2.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -19,10 +28,6 @@ GEM
     cocaine (0.1.0)
     devise (1.0.9)
       warden (~> 0.10.3)
-    devise_bushido_authenticatable (1.0.0)
-      devise
-      devise (>= 1.0.6)
-      rubycas-client (>= 2.2.1)
     mime-types (1.16)
     paperclip (2.3.16)
       activerecord (>= 2.3.0)
@@ -54,7 +59,7 @@ PLATFORMS
 DEPENDENCIES
   aws-s3
   devise (= 1.0.9)
-  devise_bushido_authenticatable
+  devise_bushido_authenticatable!
   paperclip
   pg
   rails (~> 2.3.5)
