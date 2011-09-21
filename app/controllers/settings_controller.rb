@@ -1,6 +1,7 @@
 class SettingsController < ApplicationController
-  def email
-    @setting = Setting.find_or_create_by_key("notification_email")
+  def general
+    # @setting = Setting.find_or_create_by_key("notification_email")
+    @setting = Setting.find_or_create_by_key("bushido_dns")
   end
   
   def update

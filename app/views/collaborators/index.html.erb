@@ -3,7 +3,7 @@
 <%= render :partial => "/shared/subnav",
            :locals => {
              :header => "Settings",
-             :links => [["Users", collaborators_path], ["Email", email_settings_path]]
+             :links => [["General", general_settings_path], ["Users", collaborators_path]]
            } %>
 
 <div id="container">
@@ -43,7 +43,7 @@
   
   <div style="background: #2d2d2d; padding-bottom: 200px;">
     <% form_tag collaborators_url, :target => "_top" do %>
-      <%= input :type=>"text", :name=>"email" %>
+      <%= text_field_tag :type=>"text", :name=>"email" %>
       <%= submit_tag "Add" %>
     <% end %>
   </div>

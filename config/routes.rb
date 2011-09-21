@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+
+  map.resources :collaborators
   map.resources :comments, :collection => {:ajax_create => :post}
   map.resources :mocks
   map.resources :mock_lists
@@ -8,7 +10,7 @@ ActionController::Routing::Routes.draw do |map|
   # map.resources :users
   #map.logout '/session/destroy', :controller => :sessions, :action => :destroy
   # map.resource  :session
-  # map.resources :settings, :collection => {:email => :get, :users => :get}
+  map.resources :settings, :collection => {:general => :get, :users => :get}
  
   map.claim '/claim', :controller => :claim
   map.connect '/intro', :controller => :intro

@@ -26,7 +26,7 @@
         <%= link_to image_tag('logo-new.png'), home_path, :id => "logo" %>
         <div class="nav">
           <%= link_to "Home", home_path, :class => "home hoverable" %>
-          <%- # link_to "Settings", users_path, :class => "settings hoverable" %>
+          <%= link_to "Settings", collaborators_path, :class => "settings hoverable" %>
           <% if viewer %>
             <%= link_to("Sign out", destroy_user_session_path) %>
           <% end %>
