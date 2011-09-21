@@ -33,8 +33,8 @@
         </td>
         <td class="actions">
           <% if viewer != user %>
-            <% #<span class="divider">|</span> <%= link_to "Remove",
-               #user_path(user, :user => {:active => :false}), :method => :put %>
+             <span class="divider">|</span> <%= link_to "Remove",
+               collaborators_path(user, :user => {:active => :false}), :method => :put %>
           <% end %>
         </td>
       </tr>
