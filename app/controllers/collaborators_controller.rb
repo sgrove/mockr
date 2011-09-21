@@ -14,7 +14,7 @@ class CollaboratorsController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
-    Bushido::User.remove_user(user.ido_id)
+    Bushido::User.remove(user.ido_id)
     flash[:notice] = "Access to #{user.name} has been revoked!"
     user.destroy
     redirect_to collaborators_path

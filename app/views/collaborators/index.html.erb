@@ -34,7 +34,7 @@
         <td class="actions">
           <% if viewer != user %>
              <span class="divider">|</span> <%= link_to "Remove",
-               collaborators_path(user, :user => {:active => :false}), :method => :put %>
+               collaborator_url(user), :method => :delete %>
           <% end %>
         </td>
       </tr>
