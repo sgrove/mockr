@@ -1,4 +1,26 @@
-# Be sure to restart your server when you modify this file
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2011.09.23.15.07.33;	author akashmanohar;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@# Be sure to restart your server when you modify this file
 
 # Uncomment below to force Rails into production mode when
 # you don't control web/app server and can't set it the proper way
@@ -41,7 +63,7 @@ Rails::Initializer.run do |config|
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
-    :key => '_mockr_session',
+    :session_key => '_mockr_session',
     :secret      => '21ee28b973e26bef6f112ae1807d3ff3eafeebadb1f0ccf70b098451ba139e24d5de6508045291bcca481317969c3852241ed097c1d2431d80407e268f74731e',
     :session_expires => Time.now + 31557600 #1.year not yet defined
   }
@@ -64,3 +86,4 @@ Rails::Initializer.run do |config|
 
   config.action_mailer.default_url_options = {:host => (ENV['BUSHIDO_DOMAIN'] || "mockr")}
 end
+@
