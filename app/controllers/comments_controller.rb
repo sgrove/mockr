@@ -1,6 +1,10 @@
 class CommentsController < ApplicationController
+
+  before_filter :authenticate_user!
+
   def create
     @comment = Comment.new(params[:comment])
+    @comment.author_id = current_user.id
     begin
       @comment.save!
       @feeling = Award.maybe_grant_award(@comment)

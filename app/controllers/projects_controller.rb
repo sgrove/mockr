@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
     if params[:inline].to_i == 1
       render :text => params[:project].values.first
     else
-      redirect_to project_path(project)
+      redirect_to project_path(@project)
     end
   end
 

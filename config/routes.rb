@@ -7,9 +7,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :projects, :member => {:mock_list_selector => :get}
   
   map.devise_for :users
-  # map.resources :users
-  #map.logout '/session/destroy', :controller => :sessions, :action => :destroy
-  # map.resource  :session
   map.resources :settings, :collection => {:general => :get, :users => :get}
  
   map.claim '/claim', :controller => :claim
