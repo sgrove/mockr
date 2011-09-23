@@ -17,5 +17,9 @@ gem 'aws-s3'
 gem 'pg'
 gem 'sqlite3'
 
+gem 'test-unit', '1.2.3'
+gem 'rspec-rails', "1.3.4"
+gem 'remarkable_activerecord'
+gem 'remarkable_rails'
 #group :development do
 #end
