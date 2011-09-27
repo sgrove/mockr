@@ -40,6 +40,7 @@ Rails::Initializer.run do |config|
   # If you change this key, all old sessions will become invalid!
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
+  
   #config.action_controller.session = {
   #  :key => '_mockr_session',
   #  :secret      => '21ee28b973e26bef6f112ae1807d3ff3eafeebadb1f0ccf70b098451ba139e24d5de6508045291bcca481317969c3852241ed097c1d2431d80407e268f74731e',
