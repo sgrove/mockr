@@ -8,7 +8,11 @@ describe MocksController do
   end
 
   def mock_mock(stubs={})
-    @mock_mock ||= mock_model Mock, stubs
+    @mock_mock ||= mock_model(Mock, stubs)
+  end
+
+  def valid_attributes
+    {"title" => "a new mock"}
   end
   
   describe "GET new" do
@@ -45,15 +49,26 @@ describe MocksController do
   end
 
   describe "POST create" do
+    it "should create a mock" do
+      expect {
+        mock = Factory.build :mock
+        post :create, :mock => mock.attributes
+      }.to change(Mock, :count).by(1)
+    end
   end
 
   describe "GET show" do
+    it "should render the mocks/show layout" do
+      render_with_layout :layout => "mocks/show"
+    end
   end
     
   describe "PUT update" do
+    it "should update the project" do
+      Mock.stub(:find).with("42").and_return(mock_mock)
+      mock_mock.should_receive(:update_attributes).with(valid_attributes)
+      put :update, :id => "42", :mock => valid_attributes
+    end
   end
-
-  describe "DELETE destroy" do
-  end
-
+ 
 end

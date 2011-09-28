@@ -31,8 +31,9 @@ end
 Factory.define :mock do |f|
   f.title "example mock"
   f.description "this is an example"
-  f.image_file_name "abe_lincoln.png"
+  #f.image_file_name "abe_lincoln.png"
   f.path "/some/path/to/Rome"
+  f.image { File.new(RAILS_ROOT + '/spec/fixtures/images/lincoln.jpg') }
   f.author {|a| a.association(:user)}
   f.association :mock_list, :factory=> :mock_list
 end

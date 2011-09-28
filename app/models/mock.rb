@@ -15,6 +15,12 @@ class Mock < ActiveRecord::Base
                    
   validates_presence_of :author, :image_file_name, :mock_list, :version
 
+  after_update :notify_users
+
+  def notify_users
+    Notifier.deliver_new_mock(self)
+  end
+
   before_validation do |mock|
     mock.assign_version if mock.version.nil?
   end

@@ -7,7 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :projects, :member => {:mock_list_selector => :get}
   
   map.devise_for :users
-  map.resources :settings, :collection => {:general => :get, :users => :get}
+  map.resources :settings, :collection => {:general => :get, :update_all => :put, :users => :get}
  
   map.claim '/claim', :controller => :claim
   map.connect '/intro', :controller => :intro
