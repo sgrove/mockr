@@ -1,7 +1,7 @@
 class SettingsController < ApplicationController
   def general
     # @setting = Setting.find_or_create_by_key("notification_email")
-    @setting = Setting.find_or_create_by_key("bushido_dns")
+    @settings = Setting.all
   end
 
   # NOTE: now editing multiple records in update_all action. That should suffice

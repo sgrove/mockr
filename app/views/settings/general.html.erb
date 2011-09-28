@@ -12,10 +12,11 @@
   <% form_tag update_all_settings_path, :method => :put do %>
   <% for setting in @settings %>
       <% fields_for "settings[]", setting do |f| %>
-        <h2><%=h setting.name %></h2>
         <%= f.error_messages :object_name => "setting" %>
-        <%= f.label :name %><br />
-        <%= f.text_field :value %>
+        <p>
+          <%= f.label setting.key %><br />
+          <%= f.text_field :value %>
+        </p>
       <% end %>
     <% end %>
     <p><%= submit_tag "Submit" %></p>
