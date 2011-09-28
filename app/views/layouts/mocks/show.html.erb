@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title><%= @title || '' %> | Mockr</title>
     <link rel="shortcut icon" href="/images/feelings/happy.gif" />
@@ -14,7 +14,6 @@
     <%= yield :head %>
   </head>
   <body<%= ' class="fullscreen"' unless @sidebar %>>
-    <%= render :partial => "/shared/facebook_connect_js" %>
 
     <% if !flash[:notice].blank? %>
       <div id="notice"><%= flash[:notice] %></div>
