@@ -5,6 +5,11 @@ Mockr is a design mocking application, which makes it easy for teams to share, a
 
 It can be hosted standalone or on [Bushido](http://bushi.do)
 
+If you want to install the app on localhost: rake app:install
+On Bushido, the same rake task is aliased as rake bushido:install
+
+Local support isn't that great. Bushido support is priority for now, so please be patient.
+
 Notes
 ------
 
