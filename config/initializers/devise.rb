@@ -2,7 +2,6 @@
 # four configuration values can also be set straight in your models.
 Devise.setup do |config|
   # Configure the e-mail address which will be shown in DeviseMailer.
-  config.mailer_sender = ENV['SMTP_USER'] || "example@bushido-mockr.com"
 
   if Devise::on_bushido?
     #if ENV['RAILS_ENV']=="development"
