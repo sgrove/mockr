@@ -13,6 +13,7 @@ describe CommentsController do
 
   describe "POST 'create'" do
     it "should redirect to mock path" do
+      Notifier.stub!(:deliver_new_mock).and_return(true)
       login_user
       comment = Factory.build :comment
       controller.stub!(:current_user).and_return(User.first)
@@ -23,6 +24,7 @@ describe CommentsController do
 
   describe "DELETE 'destroy'" do
     it "should redirect to mock path" do
+      Notifier.stub!(:deliver_new_mock).and_return(true)
       login_user
       comment = Factory :comment
       delete :destroy, :id => comment.id.to_s
@@ -30,6 +32,7 @@ describe CommentsController do
     end
 
     it "deletes the comment" do
+      Notifier.stub!(:deliver_new_mock).and_return(true)
       comment = Factory :comment
       expect {
         login_user
