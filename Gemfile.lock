@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: git://github.com/HashNuke/bushidogem.git
-  revision: bead62a359d41393d050020512cc4e6d97d3ffc0
+  revision: 923dd90b99b9dc5b19a23a8fbba86938eeb67750
   branch: tryout
   specs:
     bushido (0.0.35)
