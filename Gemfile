@@ -17,8 +17,9 @@ gem 'pg'
 
 group :development do
   gem 'factory_girl', '1.2.4'
-  gem 'test-unit', '1.2.3'
   gem 'rspec-rails', "1.3.4"
   gem 'remarkable_activerecord'
   gem 'remarkable_rails'
 end
+
+gem 'test-unit', '1.2.3'
