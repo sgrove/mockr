@@ -1,19 +1,25 @@
 source "http://rubygems.org"
 
+# Core framework
 gem "rake", "0.9.2"
 gem "rdoc", "2.4.3"
 gem "rails", "~> 2.3.14"
+gem 'pg'
 
-gem 'bushido', :git => "git://github.com/HashNuke/bushidogem.git", :branch => "tryout"
-
+# User auth
 gem "devise", "1.0.9"
 gem 'devise_bushido_authenticatable', :git=>"git://github.com/Bushido/devise_cas_authenticatable.git"
 
+# Image processing and storage
 gem 'rmagick'
 gem 'paperclip'
-
 gem 'aws-s3'
-gem 'pg'
+
+# Misc.
+gem 'bushido', :git => "git://github.com/HashNuke/bushidogem.git", :branch => "tryout"
+
+# In 'all group' because rake tasks rely on this for now
+gem 'test-unit', '1.2.3'
 
 group :development do
   gem 'factory_girl', '1.2.4'
@@ -22,4 +28,4 @@ group :development do
   gem 'remarkable_rails'
 end
 
-gem 'test-unit', '1.2.3'
+
