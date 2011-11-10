@@ -17,6 +17,7 @@ gem 'aws-s3'
 
 # Misc.
 gem 'bushido', :git => "git://github.com/HashNuke/bushidogem.git", :branch => "tryout"
+gem 'hoe', '~> 1.5.1' # Heroku's rubygems is too old for hoe 2.9.1 as of 28 Mar 2011
 
 # In 'all group' because rake tasks rely on this for now
 gem 'test-unit', '1.2.3'
