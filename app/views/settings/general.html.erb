@@ -1,0 +1,24 @@
+<% @title = "Settings" %>
+
+<%= stylesheet_link_tag "settings/general" %>
+
+<%= render :partial => "/shared/subnav",
+           :locals => {
+             :header => "Settings",
+             :links => [["General", general_settings_path], ["Users", collaborators_path]]
+           } %>
+
+<div id="tabbed_content">
+  <% form_tag update_all_settings_path, :method => :put do %>
+  <% for setting in @settings %>
+      <% fields_for "settings[]", setting do |f| %>
+        <%= f.error_messages :object_name => "setting" %>
+        <p>
+          <%= f.label setting.key %><br />
+          <%= f.text_field :value %>
+        </p>
+      <% end %>
+    <% end %>
+    <p><%= submit_tag "Submit" %></p>
+  <% end %>
+</div>

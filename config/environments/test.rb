@@ -1,5 +1,7 @@
 # Settings specified here will take precedence over those in config/environment.rb
 
+config.gem "factory_girl", :lib => "factory_girl"
+
 # The test environment is used exclusively to run your application's
 # test suite.  You never need to work with it otherwise.  Remember that
 # your test database is "scratch space" for the test suite and is wiped
@@ -20,3 +22,5 @@ config.action_controller.allow_forgery_protection    = false
 # The :test delivery method accumulates sent emails in the
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
+
+  config.gem 'rspec-rails', :version => '>= 1.3.4', :lib => false unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))

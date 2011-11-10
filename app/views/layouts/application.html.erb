@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title><%= "#{@title} |" if @title %> Mockr</title>
     <link rel="shortcut icon" href="/images/feelings/happy.gif" />
@@ -16,7 +16,6 @@
     <%= yield :head %>
   </head>
   <body<%= ' class="fullscreen"' unless @sidebar %>>
-    <%= render :partial => "/shared/facebook_connect_js" %>
     <div id="header_container">
       <div class="clearfix" id="header">
         <div class="buttons">
@@ -26,7 +25,7 @@
         <%= link_to image_tag('logo-new.png'), home_path, :id => "logo" %>
         <div class="nav">
           <%= link_to "Home", home_path, :class => "home hoverable" %>
-          <%= link_to "Settings", users_path, :class => "settings hoverable" %>
+          <%= link_to "Settings", collaborators_path, :class => "settings hoverable" %>
           <% if viewer %>
             <%= link_to("Sign out", destroy_user_session_path) %>
           <% end %>

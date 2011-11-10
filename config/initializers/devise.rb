@@ -2,8 +2,15 @@
 # four configuration values can also be set straight in your models.
 Devise.setup do |config|
   # Configure the e-mail address which will be shown in DeviseMailer.
-  config.mailer_sender = ENV['SMTP_USER'] || "example@bushido-mockr.com"
-  
+
+  if Devise::on_bushido?
+    #if ENV['RAILS_ENV']=="development"
+      #config.cas_base_url = "https://localhost:3000/cas"
+    #else
+      config.cas_base_url = "https://bushi.do/cas"
+    #end
+  end
+
   # Configure the content type of DeviseMailer mails (defaults to text/html")
   # config.mailer_content_type = "text/plain"
 

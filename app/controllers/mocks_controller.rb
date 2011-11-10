@@ -6,6 +6,7 @@ class MocksController < ApplicationController
 
   def create
     mock = Mock.new(params[:mock])
+
     if params[:project]
       if params[:project][:id].blank?
         project_id = Project.create_new_untitled_project!.id
@@ -14,9 +15,13 @@ class MocksController < ApplicationController
       end
       mock.attach_mock_list_if_necessary!(project_id)
     end
+
     begin
       mock.save!
+      
+      # NOTE: move emailing to elsewhere
       mock.deliver(params[:email]) if params[:send_email].to_i == 1
+     
       flash[:notice] = "Mock created!"
       redirect_to mock_path(mock)
     rescue ActiveRecord::RecordInvalid => error
@@ -47,7 +52,7 @@ class MocksController < ApplicationController
   def update
     @mock = Mock.find(params[:id])
     @mock.update_attributes(params[:mock])
-    Notifier.deliver_new_mock(@mock)
+    # NOTE previously was here: Notifier.deliver_new_mock(@mock)
     flash[:notice] = "Email sent!"
     redirect_to mock_path(@mock)
   end

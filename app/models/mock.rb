@@ -9,13 +9,17 @@ class Mock < ActiveRecord::Base
               :include => [:author, {:mock_list => :project}]
 
   has_attached_file :image,
-    PAPERCLIP_STORAGE_OPTIONS.merge(
-      :styles => {
-        :thumb  => "150x150#" # 150x150 thumbnail
-      }
-    )
-
+                    :styles => { :thumb  => "150x150#" },
+                    :url => "/store/:attachment/:id/:style/:basename.:extension"
+                    #:path => ":rails_root/permanent/store/:attachment/:id/:style/:basename.:extension"
+                   
   validates_presence_of :author, :image_file_name, :mock_list, :version
+
+  after_update :notify_users
+
+  def notify_users
+    Notifier.deliver_new_mock(self)
+  end
 
   before_validation do |mock|
     mock.assign_version if mock.version.nil?
