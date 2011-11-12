@@ -10,8 +10,10 @@ class Mock < ActiveRecord::Base
 
   has_attached_file :image,
                     :styles => { :thumb  => "150x150#" },
-                    :url => "/store/:attachment/:id/:style/:basename.:extension"
-                    #:path => ":rails_root/permanent/store/:attachment/:id/:style/:basename.:extension"
+                    :url => "/store/:attachment/:id/:style/:basename.:extension",
+                    :storage => :s3,
+                    :s3_credentials => "config/s3.yml",
+                    :path => "#{ENV['S3_PREFIX']}/:attachment_:id_:style_:basename.:extension"
                    
   validates_presence_of :author, :image_file_name, :mock_list, :version
 
