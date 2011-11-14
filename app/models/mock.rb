@@ -28,7 +28,7 @@ class Mock < ActiveRecord::Base
   end
 
   def self.hosted_by_aws?
-    File.exists?(AWS_W3_CONFIG_FILE)
+    File.exists?(S3_CONFIG_FILE)
   end
 
   def attachment_body
