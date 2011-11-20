@@ -42,6 +42,7 @@ class Comment < ActiveRecord::Base
   end
 
   after_create do |comment|
+    puts "Checking for new comments to email out"
     discussions = MockView.discussions_relevant_to(comment)
     discussions.each do |discussion|
       discussion.reply_count += 1
