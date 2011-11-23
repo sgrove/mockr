@@ -14,4 +14,11 @@ config.action_view.debug_rjs                         = true
 config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
-config.action_mailer.raise_delivery_errors = false
+config.action_mailer.raise_delivery_errors = true
+
+if ENV["BUSHIDO_APP_KEY"].nil?
+  puts "Using normal ActionMailer method"
+else
+  config.action_mailer.delivery_method = :bushido
+  puts "Using ActionMailer method: #{config.action_mailer.delivery_method}"
+end

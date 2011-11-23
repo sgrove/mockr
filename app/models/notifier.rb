@@ -2,7 +2,7 @@ class Notifier < ActionMailer::Base
   helper ApplicationHelper
 
   # TODO: fix this
-  REPLY_TO = "do-not-reply@causes.com"
+  REPLY_TO = Bushido::Platform.on_bushido? ? "#{ENV['SMTP_USER']}" : "do-not-reply@mockr.gobushido.com"
 
   def new_comment(comment)
     from REPLY_TO
