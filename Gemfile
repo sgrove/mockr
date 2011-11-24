@@ -16,7 +16,7 @@ gem 'paperclip'
 gem 'aws-s3'
 
 # Misc.
-gem 'bushido', :git => "git://github.com/Bushido/bushidogem.git", :branch => "bushi_bar_updates"
+gem 'bushido', :git => "git://github.com/Bushido/bushidogem.git", :branch => "email_routes"
 gem 'hoe', '~> 1.5.1' # Heroku's rubygems is too old for hoe 2.9.1 as of 28 Mar 2011
 gem 'json'
 gem 'action_mailer_tls'
