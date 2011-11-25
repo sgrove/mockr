@@ -39,6 +39,13 @@ module MockrBushido
         user.destroy
       end
      puts "done"
+
+     print "Subscribing to mail.received..."
+      ::Bushido::Data.listen('mail.received') do |payload, event|
+        puts "Got an incoming email, looks like:"
+        puts payload.inspect
+      end
+     puts "done"
     end
   end
 end
