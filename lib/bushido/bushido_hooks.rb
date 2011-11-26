@@ -29,12 +29,11 @@ module MockrBushido
       end
 
 
-      ::Bushido::Data.listen('mail.received') do |payload, event|
+      ::Bushido::Data.listen('mail.received') do |mail, event|
         puts "Got some mail!"
-        puts payload.inspect
-        puts event.inspect
-        mail = payload[:data][:mail]
         puts "Here's the mail: #{mail.inspect}"
+        puts event.inspect
+
         # attachments = []
         # puts "collecting attachments!"
         # mail["attachment_count"].to_i.times do |counter|
@@ -83,7 +82,7 @@ module MockrBushido
           puts "User should be the correct email #{mail['from']} or #{mail['sender']}..."
           comment.author_id = User.find_by_email(mail["sender"]) || User.first.id
           comment.parent_id = parent_comment.id if parent_comment
-          comment.text = mail["body-plain"]
+          comment.text = mail["stripped-text"]
           comment.mock = mock
           comment.save
         end
