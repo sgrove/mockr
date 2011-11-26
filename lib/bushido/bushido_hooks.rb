@@ -47,8 +47,8 @@ module MockrBushido
 
         result = command_pattern.match(mail["subject"])
         project_title = result[1]
-        mock_list = result[2]
-        version = result[3].to_i
+        mock_list_title = result[2]
+        mock_version = result[3].to_i
         comment_id = result[4].to_i
 
         puts "Getting the project_title:"
