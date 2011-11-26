@@ -48,15 +48,15 @@ module MockrBushido
         result = command_pattern.match(mail["subject"])
         project_title = result[1]
         mock_list_title = result[2]
-        mock_version = result[3].to_i
+        mock_id = result[3].to_i
         comment_id = result[4].to_i
 
         puts "Getting the project_title:"
         puts "\tproject_title: #{project_title}"
         puts "Getting the mock_list_title"
         puts "\tmock_list_title: #{mock_list_title}"
-        puts "Getting the mock_version:"
-        puts "\tmock_version: #{mock_version}"
+        puts "Getting the mock_id:"
+        puts "\tmock_id: #{mock_id}"
         puts "Getting the comment_id:"
         puts "\tcomment_id: #{comment_id}"
 
@@ -65,13 +65,21 @@ module MockrBushido
         mock_list = MockList.find_or_create_by_title_and_project_id(mock_list_title, project.id)
         puts "mock_list: #{mock_list.inspect}"
 
-        mock = Mock.find(:first, :conditions => {:version => mock_version, :mock_list_id => mock_list.id}) if version != 0
+        mock = Mock.find(:first, :conditions => {:id => mock_id}) if mock_id != 0
         comment = Comment.find(comment_id) if comment_id != 0
 
         puts "Project:  #{project.inspect}"
         puts "MockList: #{mock_list.inspect}"
         puts "Mock:     #{mock.inspect}" if mock
         puts "Comment   #{comment.inspect}" if comment
+
+        if mock
+          comment = Comment.new
+          puts "User should be the correct email #{mail['from']} or #{mail['sender']}..."
+          comment.author_id = User.first.id
+          comment.text = mail["body-plain"]
+          comment.save
+        end
       end
     end
   end
