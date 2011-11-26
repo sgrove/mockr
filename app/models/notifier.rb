@@ -32,7 +32,7 @@ class Notifier < ActionMailer::Base
   
   def mock_subject(mock, comment=nil)
     # Use the comment's parent id if it's present
-    comment_id = comment and (comment.parent_id || comment.id)
+    comment_id = (comment.parent_id || comment.id) if comment
 
     base = "#{mock.project.title}: #{mock.mock_list.title} ##{mock.id}"
     base += " comment #{comment_id}" if comment_id
