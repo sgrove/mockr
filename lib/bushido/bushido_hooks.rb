@@ -43,7 +43,7 @@ module MockrBushido
         # attachmets.flatten!
 
         # See to experiment with pattern: http://rubular.com/r/sEz3lCWHLb
-        command_pattern = /([a-z0-9 ]*):[[\s]*]?(\w*)?[[\s]*]?#?(\d*)[[\s]*]?[[comment]*]?[[\s]*]?(\d*)$/i
+        command_pattern = /([a-z0-9 ]*):[[\s]*]?([\w|\s_*!~@$-]*)?[[\s]*]?#?(\d*)[[\s]*]?[[comment]*]?[[\s]*]?(\d*)$/i
 
         result = command_pattern.match(mail["subject"])
         project_title = result[1]
