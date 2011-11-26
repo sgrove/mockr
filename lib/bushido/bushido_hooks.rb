@@ -46,6 +46,9 @@ module MockrBushido
         command_pattern = /([a-z0-9 ]*):[[\s]*]?([\w|\s_*!~@$-]*)?[[\s]*]?#?(\d*)[[\s]*]?[[comment]*]?[[\s]*]?(\d*)$/i
 
         result = command_pattern.match(mail["subject"])
+
+        puts result.inspect
+
         project_title = result[1]
         mock_list_title = result[2]
         mock_id = result[3].to_i
