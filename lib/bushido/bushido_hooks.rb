@@ -76,7 +76,7 @@ module MockrBushido
         puts "Project:  #{project.inspect}"
         puts "MockList: #{mock_list.inspect}"
         puts "Mock:     #{mock.inspect}" if mock
-        puts "Comment   #{comment.inspect}" if comment
+        puts "Comment   #{parent_comment.inspect}" if parent_comment
 
         if mock
           comment = Comment.new
