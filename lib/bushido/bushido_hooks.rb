@@ -58,13 +58,13 @@ module MockrBushido
         comment_id =  subject.split(":").last.split("#").last.split("comment").last.to_i
         puts "\tcomment_id: #{comment_id}"
 
-        project = Project.find_or_create_by_title project_title
+        project = Project.find_or_create_by_title(project_title)
         puts "project: #{project.inspect}"
-        mock_list = Project.mock_lists.find_or_create_by_title mock_list_title
+        mock_list = MockList.find_or_create_by_title_and_project_id(mock_list_title, project.id)
         puts "mock_list: #{mock_list.inspect}"
 
-        mock = mock_list.mocks.find_by_version mock_version if mock_version != 0
-        comment = mock.comments.find(comment_id) if comment_id != 0
+        mock = Mock.find(:first, :conditions => {:version => mock_version, :mock_list_id => mock_list.id})
+        comment = Comment.find(comment_id) if comment_id != 0
 
         puts "Project:  #{project.inspect}"
         puts "MockList: #{mock_list.inspect}"
