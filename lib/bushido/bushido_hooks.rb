@@ -47,6 +47,7 @@ module MockrBushido
         result = command_pattern.match(mail["subject"])
 
         puts command_pattern.inspect
+        puts mail["subject"]
         puts result.inspect
 
         reply           = result[1]
