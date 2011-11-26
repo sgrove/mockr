@@ -1,3 +1,14 @@
+# Automatically inserted by Bushido
+# Sets up routes for Rails 2 apps
+begin
+  ActionController::Routing::Routes.draw do |map|
+    map.bushido_routes
+  end
+rescue
+  puts "Error loading the Bushido routes"
+end
+
+
 ActionController::Routing::Routes.draw do |map|
 
   map.resources :collaborators
@@ -16,3 +27,4 @@ ActionController::Routing::Routes.draw do |map|
   map.usage '/usage', :controller => 'usage'
   map.root :controller => 'home', :actions => 'index'
 end
+
