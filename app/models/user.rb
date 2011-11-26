@@ -25,9 +25,9 @@ class User < ActiveRecord::Base
 
   # called only if hosted on Bushido by the auth library
   def bushido_extra_attributes(extra_attributes)
-    puts "EXTRA ATTRIBS: #{extra_attributes.inspect}"
+    puts "Extra attributes: #{extra_attributes.inspect}"
     self.email = extra_attributes["email"]
-    self.name = extra_attributes["first_name"] + " " + extra_attributes["last_name"]
+    self.name = "#{extra_attributes['first_name']} #{extra_attributes['last_name']}"
   end
 
   def self.activate!(email, name)
