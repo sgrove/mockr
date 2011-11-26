@@ -31,6 +31,6 @@ class Notifier < ActionMailer::Base
   private
   
   def mock_subject(mock)
-    mock.title
+    "#{mock.project.title}: #{mock.mock_list.title} ##{mock.id}"
   end  
 end
