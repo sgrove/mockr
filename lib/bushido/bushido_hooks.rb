@@ -31,7 +31,9 @@ module MockrBushido
 
       ::Bushido::Data.listen('mail.received') do |payload, event|
         puts "Got some mail!"
-        mail = payload["mail"]
+        puts payload.inspect
+        puts event.inspect
+        mail = payload[:mail]
         puts "Here's the mail: #{mail.inspect}"
         # attachments = []
         # puts "collecting attachments!"
