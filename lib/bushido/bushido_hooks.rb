@@ -33,7 +33,7 @@ module MockrBushido
         puts "Got some mail!"
         puts payload.inspect
         puts event.inspect
-        mail = payload[:mail]
+        mail = payload[:data][:mail]
         puts "Here's the mail: #{mail.inspect}"
         # attachments = []
         # puts "collecting attachments!"
