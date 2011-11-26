@@ -1,51 +1,59 @@
 module MockrBushido
   class MockrHooks
     def self.subscribe_to_events
-     print "Subscribing to app.claimed..."
       ::Bushido::Data.listen('app.claimed') do |payload, event|
         data = payload["data"]
-        puts "Data: #{data.inspect} (#{data.class})"
-        puts "Event: #{event.inspect} (#{event.class})"
+
         user = User.find(1)
         user.email = data['email']
         user.ido_id = data['ido_id']
         user.save
       end
-     puts "done"
 
-     print "Subscribing to user.added..."
+
       ::Bushido::Data.listen('user.added') do |payload, event|
         data = payload["data"]
-        puts "Adding a new account with incoming data #{event.inspect}"
-        puts "Devise username column: #{::Devise.cas_username_column}="
-        puts "Setting username to: #{payload['data'].try(:[], 'ido_id')}"
 
         user = User.new
         user.email = data['email']
         user.ido_id = data['ido_id']
         user.save
       end
-     puts "done"
 
-     print "Subscribing to user.removed..."
+
       ::Bushido::Data.listen('user.removed') do |payload, event|
-        puts "Removing account based on incoming data #{event.inspect}"
-        puts "Devise username column: #{::Devise.cas_username_column}="
-        puts "Removing username: #{payload['data'].try(:[], 'ido_id')}"
-
         ido_id = payload['data'].try(:[], 'ido_id')
 
         user = User.find_by_ido_id(ido_id)
         user.destroy
       end
-     puts "done"
 
-     print "Subscribing to mail.received..."
+
       ::Bushido::Data.listen('mail.received') do |payload, event|
-        puts "Got an incoming email, looks like:"
-        puts payload.inspect
+        mail = payload["mail"]
+        attachments = []
+        mail["attachment_count"].to_i.times do |counter|
+          attachments << mail["attachment_#{counter}"]
+        end
+        attachmets.flatten!
+
+        subject = mail["subject"]
+        project_title = subject.split(":").first
+        mock_list_title = subject.split(":").last.split("#").first
+        mock_version = subject.split(":").last.split("#").last.split("comment").first.to_i
+        comment_id =  subject.split(":").last.split("#").last.split("comment").last.to_i
+
+        project = Project.find_or_create_by_title project_title
+        mock_list = Project.mock_lists.find_or_create_by_title mock_list_title
+
+        mock = mock_list.mocks.find_by_version mock_version if mock_version != 0
+        comment = mock.comments.find(comment_id) if comment_id != 0
+
+        puts "Project:  #{project.inspect}"
+        puts "MockList: #{mock_list.inspect}"
+        puts "Mock:     #{mock.inspect}"
+        puts "Comment   #{comment.inspect}"
       end
-     puts "done"
     end
   end
 end
