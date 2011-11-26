@@ -78,6 +78,7 @@ module MockrBushido
           puts "User should be the correct email #{mail['from']} or #{mail['sender']}..."
           comment.author_id = User.first.id
           comment.text = mail["body-plain"]
+          comment.mock = mock
           comment.save
         end
       end
