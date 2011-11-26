@@ -71,7 +71,7 @@ module MockrBushido
         puts "mock_list: #{mock_list.inspect}"
 
         mock = Mock.find(:first, :conditions => {:id => mock_id}) if mock_id != 0
-        comment = Comment.find(comment_id) if comment_id != 0
+        parent_comment = Comment.find(comment_id) if comment_id != 0
 
         puts "Project:  #{project.inspect}"
         puts "MockList: #{mock_list.inspect}"
@@ -82,7 +82,7 @@ module MockrBushido
           comment = Comment.new
           puts "User should be the correct email #{mail['from']} or #{mail['sender']}..."
           comment.author_id = User.find_by_email(mail["sender"]) || User.first.id
-          comment.parent_id = comment_id if comment_id
+          comment.parent_id = parent_comment.id if parent_comment
           comment.text = mail["body-plain"]
           comment.mock = mock
           comment.save
