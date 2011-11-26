@@ -32,3 +32,5 @@ group :development do
 end
 
 
+
+gem 'thin', '>=1.2.7'
