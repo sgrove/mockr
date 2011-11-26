@@ -42,20 +42,22 @@ module MockrBushido
         # end
         # attachmets.flatten!
 
-        puts "Getting the subject:"
-        subject = mail["subject"]
-        puts "\tsubject: #{subject}"
+        # See to experiment with pattern: http://rubular.com/r/sEz3lCWHLb
+        command_pattern = /([a-z0-9 ]*):[[\s]*]?(\w*)?[[\s]*]?#?(\d*)[[\s]*]?[[comment]*]?[[\s]*]?(\d*)$/i
+
+        result = command_pattern.match(mail["subject"])
+        project_title = result[1]
+        mock_list = result[2]
+        version = result[3].to_i
+        comment_id = result[4].to_i
+
         puts "Getting the project_title:"
-        project_title = subject.split(":").first
         puts "\tproject_title: #{project_title}"
         puts "Getting the mock_list_title"
-        mock_list_title = subject.split(":").last.split("#").first
         puts "\tmock_list_title: #{mock_list_title}"
         puts "Getting the mock_version:"
-        mock_version = subject.split(":").last.split("#").last.split("comment").first.to_i
         puts "\tmock_version: #{mock_version}"
         puts "Getting the comment_id:"
-        comment_id =  subject.split(":").last.split("#").last.split("comment").last.to_i
         puts "\tcomment_id: #{comment_id}"
 
         project = Project.find_or_create_by_title(project_title)
@@ -63,7 +65,7 @@ module MockrBushido
         mock_list = MockList.find_or_create_by_title_and_project_id(mock_list_title, project.id)
         puts "mock_list: #{mock_list.inspect}"
 
-        mock = Mock.find(:first, :conditions => {:version => mock_version, :mock_list_id => mock_list.id})
+        mock = Mock.find(:first, :conditions => {:version => mock_version, :mock_list_id => mock_list.id}) if version != 0
         comment = Comment.find(comment_id) if comment_id != 0
 
         puts "Project:  #{project.inspect}"
