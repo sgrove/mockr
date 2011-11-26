@@ -32,11 +32,7 @@ class Mock < ActiveRecord::Base
   end
 
   def attachment_body
-    if self.class.hosted_by_aws?
-      Net::HTTP.get_response(URI.parse(self.image.url)).body
-    else
-      File.read(self.image.path)
-    end
+    Net::HTTP.get_response(URI.parse(self.image.url)).body
   end
 
   def attach_mock_list_if_necessary!(project_id)
