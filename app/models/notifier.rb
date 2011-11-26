@@ -7,7 +7,7 @@ class Notifier < ActionMailer::Base
   def new_comment(comment)
     from REPLY_TO
     reply_to REPLY_TO
-    subject mock_subject(comment.mock)
+    subject mock_subject(comment.mock, comment)
     recipients comment.recipient_emails
     content_type "text/html"
     body :comment => comment
@@ -30,7 +30,9 @@ class Notifier < ActionMailer::Base
   
   private
   
-  def mock_subject(mock)
-    "#{mock.project.title}: #{mock.mock_list.title} ##{mock.id}"
+  def mock_subject(mock, comment=nil)
+    base = "#{mock.project.title}: #{mock.mock_list.title} ##{mock.id}"
+    base += " comment #{comment.id}" if comment
+    base
   end  
 end
