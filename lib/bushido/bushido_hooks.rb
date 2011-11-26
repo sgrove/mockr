@@ -81,7 +81,8 @@ module MockrBushido
         if mock
           comment = Comment.new
           puts "User should be the correct email #{mail['from']} or #{mail['sender']}..."
-          comment.author_id = User.first.id
+          comment.author_id = User.find_by_email(mail["sender"]) || User.first.id
+          comment.parent_id = comment_id if comment_id
           comment.text = mail["body-plain"]
           comment.mock = mock
           comment.save
