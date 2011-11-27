@@ -37,7 +37,7 @@ class Mock < ActiveRecord::Base
     image = Magick::ImageList.new
     image.from_blob(attachment_body)
     image.crop!(x, y, width, height)
-    image
+    image.to_blob
   end
 
   def attachment_body
