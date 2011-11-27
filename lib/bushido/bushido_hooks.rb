@@ -91,7 +91,7 @@ module MockrBushido
           mock.title = mock_list_title
           mock.description = mail["stripped-text"]
           mock.mock_list = mock_list
-          comment.author_id = User.find_by_email(mail["sender"]) || User.find(1).id
+          mock.author_id = User.find_by_email(mail["sender"]) || User.find(1).id
           mock.image = attachments.first
         end
       end
