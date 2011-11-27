@@ -34,13 +34,6 @@ module MockrBushido
         puts "Here's the mail: #{mail.inspect}"
         puts event.inspect
 
-        # attachments = []
-        # puts "collecting attachments!"
-        # mail["attachment_count"].to_i.times do |counter|
-        #   attachments << mail["attachment_#{counter}"]
-        # end
-        # attachmets.flatten!
-
         # See to experiment with pattern: http://rubular.com/r/sEz3lCWHLb
         command_pattern = p = /^(Re:\s)?([a-z\-_0-9 ]*):[[\s]*]?([\w|\s_*!~@$-]*)?[[\s]*]?#?(\d*)[[\s]*]?[comment]*[[\s]*]?(\d*)$/i
 
@@ -50,11 +43,11 @@ module MockrBushido
         puts mail["subject"]
         puts result.inspect
 
-        reply           = result[1]
-        project_title   = result[2]
-        mock_list_title = result[3]
-        mock_id         = result[4].to_i
-        comment_id      = result[5].to_i
+        reply           = !result[1].blank?
+        project_title   =  result[2]
+        mock_list_title =  result[3]
+        mock_id         =  result[4].to_i
+        comment_id      =  result[5].to_i
 
         puts "Getting the project_title:"
         puts "\tproject_title: #{project_title}"
@@ -78,14 +71,29 @@ module MockrBushido
         puts "Mock:     #{mock.inspect}" if mock
         puts "Comment   #{parent_comment.inspect}" if parent_comment
 
-        if mock
+
+        # Start from the end and work our way back
+
+        # Handle replying to a comment/mock
+        if mock and attachments.empty?
           comment = Comment.new
           puts "User should be the correct email #{mail['from']} or #{mail['sender']}..."
-          comment.author_id = User.find_by_email(mail["sender"]) || User.first.id
+          comment.author_id = User.find_by_email(mail["sender"]) || User.find(1).id
           comment.parent_id = parent_comment.id if parent_comment
           comment.text = mail["stripped-text"]
           comment.mock = mock
           comment.save
+        end
+
+        # Handle creating a new version of an existing mock
+        if mock.nil?
+          mock = Mock.new
+          mock.title = mock_list_title
+          mock.description = mail["stripped-text"]
+          mock.project = project
+          mock.mock_list = mock_list
+          comment.author_id = User.find_by_email(mail["sender"]) || User.find(1).id
+          mock.image = attachments.first
         end
       end
     end
