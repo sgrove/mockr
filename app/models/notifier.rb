@@ -10,10 +10,12 @@ class Notifier < ActionMailer::Base
     subject mock_subject(comment.mock, comment)
     recipients comment.recipient_emails
     content_type "text/html"
+
     if comment.has_selection?
+      puts "comment has selection!"
       attachment :body => comment.selection_image,
-      :content_type => "image/png",
-      :filename => "#{comment.mock.title}_#{comment.id}.png"
+                 :content_type => "image/png",
+                 :filename => "#{comment.mock.title}_#{comment.id}.png"
     end
 
     body :comment => comment
@@ -23,7 +25,7 @@ class Notifier < ActionMailer::Base
     host = self.class.default_url_options[:host]
 
     from REPLY_TO
-    recipients ||= Setting[:notification_email]
+    recipients ||= Setting[:notification_email] || User.find(1).email
     reply_to REPLY_TO
     subject mock_subject(mock)
     recipients recipients
