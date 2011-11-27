@@ -114,10 +114,11 @@ class Comment < ActiveRecord::Base
   end
 
   def has_selection?
-    parent.has_selection? or (x and y and width and height)
+    parent.try(:has_selection?) or (x and y and width and height)
   end
 
   def selection_image
-    mock.subimage(x, y, width, height)
+    return false unless self.has_selection?
+    parent.try(:selection_image) or mock.subimage(x, y, width, height)
   end
 end
