@@ -114,7 +114,7 @@ class Comment < ActiveRecord::Base
   end
 
   def has_selection?
-    x and y and width and height
+    parent.has_selection? or (x and y and width and height)
   end
 
   def selection_image
