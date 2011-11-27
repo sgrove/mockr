@@ -11,7 +11,7 @@ gem "devise", "1.0.9"
 gem 'devise_bushido_authenticatable', :git=>"git://github.com/Bushido/devise_cas_authenticatable.git"
 
 # Image processing and storage
-gem 'rmagick'
+gem 'rmagick', :require => "RMagick"
 gem 'paperclip'
 gem 'aws-s3'
 
