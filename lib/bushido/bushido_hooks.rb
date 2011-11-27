@@ -75,7 +75,7 @@ module MockrBushido
         # Start from the end and work our way back
 
         # Handle replying to a comment/mock
-        if mock and attachments.empty?
+        if mock and mail["attachments"].empty?
           comment = Comment.new
           puts "User should be the correct email #{mail['from']} or #{mail['sender']}..."
           comment.author_id = User.find_by_email(mail["sender"]) || User.find(1).id
@@ -92,7 +92,8 @@ module MockrBushido
           mock.description = mail["stripped-text"]
           mock.mock_list = mock_list
           mock.author_id = User.find_by_email(mail["sender"]) || User.find(1).id
-          mock.image = attachments.first
+          mock.image = mail["attachments"].first
+          mock.save
         end
       end
     end
