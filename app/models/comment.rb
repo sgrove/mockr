@@ -54,6 +54,7 @@ class Comment < ActiveRecord::Base
         Notifier.deliver_new_comment(comment)
       rescue Exception => e
         puts "FAILED TO DELIVER NEW COMMENT!"
+        puts e.inspect
         # TODO: hook up hoptoad and fix it
         # Not sure why this happens.
       end
