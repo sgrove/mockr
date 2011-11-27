@@ -108,4 +108,12 @@ class Comment < ActiveRecord::Base
       [self.mock.author.email].compact
     end
   end
+
+  def has_selection?
+    x and y and width and height
+  end
+
+  def selection_image
+    mock.subimage(x, y, width, height)
+  end
 end

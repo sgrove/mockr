@@ -31,6 +31,13 @@ class Mock < ActiveRecord::Base
     File.exists?(S3_CONFIG_FILE)
   end
 
+  def subimage(x, y, width, height)
+    image = Magick::ImageList.new
+    image.from_blob(attachment_body)
+    image.crop!(x, y, width, height)
+    image
+  end
+
   def attachment_body
     Net::HTTP.get_response(URI.parse(self.image.url)).body
   end

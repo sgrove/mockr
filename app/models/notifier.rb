@@ -10,6 +10,12 @@ class Notifier < ActionMailer::Base
     subject mock_subject(comment.mock, comment)
     recipients comment.recipient_emails
     content_type "text/html"
+    if comment.has_selection?
+      attachment :body => comment.selection_image,
+      :content_type => "image/png",
+      :filename => "#{comment.mock.title}_#{comment.id}.png"
+    end
+
     body :comment => comment
   end  
   
