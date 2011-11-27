@@ -19,7 +19,8 @@ class Notifier < ActionMailer::Base
                  :filename => "#{comment.mock.title}_#{comment.id}.png"
     end
 
-    body :comment => comment
+    part :body => render_message("new_comment", :comment => comment),
+         :content_type => "text/html"
   end  
   
   def new_mock(mock, recipients = nil)
