@@ -58,6 +58,8 @@ class Comment < ActiveRecord::Base
         # TODO: hook up hoptoad and fix it
         # Not sure why this happens.
       end
+    else
+      puts "There aren't any recipients for the email"
     end
   end
 
