@@ -5,6 +5,7 @@ class Notifier < ActionMailer::Base
   REPLY_TO = Bushido::Platform.on_bushido? ? "#{ENV['SMTP_USER']}" : "do-not-reply@mockr.gobushido.com"
 
   def new_comment(comment)
+    puts "Sending out email for comment!"
     from REPLY_TO
     reply_to REPLY_TO
     subject mock_subject(comment.mock, comment)
@@ -22,6 +23,7 @@ class Notifier < ActionMailer::Base
   end  
   
   def new_mock(mock, recipients = nil)
+    puts "Sending out email for mock!"
     host = self.class.default_url_options[:host]
 
     from REPLY_TO
