@@ -93,6 +93,7 @@ module MockrBushido
           mock.mock_list = mock_list
           mock.author_id = User.find_by_email(mail["sender"]) || User.find(1).id
           mock.image = mail["attachments"].first
+          mock.path = ""
           mock.save
         end
       end
