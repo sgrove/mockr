@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/Bushido/bushidogem.git
-  revision: a45a77512e68b83913ff555bb7dfbed027e46b53
+  revision: 737d1755cc7a8c0c9ca3e547071ccfe39b6d85f1
   specs:
     bushido (0.0.35)
       highline (>= 1.6.1)
