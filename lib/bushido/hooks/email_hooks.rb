@@ -32,12 +32,12 @@ class BushidoEmailHooks < Bushido::EventObserver
 
     if mock.nil?
       puts "Creating a new mock"
-      mock = Mock.new.create(:title       => mock_list.title,
-                             :description => params['mail']['stripped-text'],
-                             :mock_list   => mock_list,
-                             :author_id   => User.find_by_email(params['from_email']) || User.find(1).id,
-                             :image       => params['mail']['attachments'].first,
-                             :path        => "")
+      mock = Mock.create(:title       => mock_list.title,
+                         :description => params['mail']['stripped-text'],
+                         :mock_list   => mock_list,
+                         :author_id   => User.find_by_email(params['from_email']) || User.find(1).id,
+                         :image       => params['mail']['attachments'].first,
+                         :path        => "")
       puts "finished!"
       puts mock.inspect
     end
