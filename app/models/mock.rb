@@ -7,23 +7,17 @@ class Mock < ActiveRecord::Base
   has_many :comments, :order => "created_at DESC"
 
   named_scope :recent, lambda {|limit| {:order => "id DESC", :limit => limit}}
-  named_scope :with_author_and_project_data,
-              :include => [:author, {:mock_list => :project}]
+  named_scope :with_author_and_project_data, :include => [:author, {:mock_list => :project}]
 
   has_attached_file :image,
-                    :styles => { :thumb  => "150x150#" },
-                    :url => "/store/:attachment/:id/:style/:basename.:extension",
-                    :storage => :s3,
+                    :storage        => :s3,
                     :s3_credentials => "config/s3.yml",
-                    :path => "#{ENV['S3_PREFIX']}/:attachment_:id_:style_:basename.:extension"
-                   
+                    :styles         => { :thumb  => "150x150#" },
+                    :url            => "/store/:attachment/:id/:style/:basename.:extension",
+                    :path           => "#{ENV['S3_PREFIX']}/:attachment_:id_:style_:basename.:extension"
+
+
   validates_presence_of :author, :image_file_name, :mock_list, :version
-
-  after_update :notify_users
-
-  def notify_users
-    Notifier.deliver_new_mock(self)
-  end
 
   before_validation do |mock|
     mock.assign_version if mock.version.nil?

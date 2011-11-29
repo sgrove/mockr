@@ -1,74 +1,36 @@
 class Comment < ActiveRecord::Base
 
-  MAX_COMMENT_LENGTH = 2_000 
-  belongs_to :author,
-    :class_name => "User"
-  belongs_to :mock, :touch => true
-  belongs_to :parent,
-    :class_name => 'Comment'
-  has_many :children,
-    :class_name => 'Comment',
-    :foreign_key => 'parent_id'
+  has_many   :children, :class_name => 'Comment', :foreign_key => 'parent_id'
+  belongs_to :author,   :class_name => "User"
+  belongs_to :parent,   :class_name => 'Comment'
+  belongs_to :mock,     :touch      => true
 
+  named_scope :about,       lambda {|mock|      {:conditions => {:mock_id => mock.id     }}}
+  named_scope :by,          lambda {|author|    {:conditions => {:author_id => author.id }}}
+  named_scope :in_reply_to, lambda {|parent_id| {:conditions => {:parent_id => parent_id }}}
+  named_scope :since,       lambda {|time|      {:conditions => ["created_at >= ?", time] }}
+  named_scope :sad,                              :conditions => {:feeling => "sad"         }
+  named_scope :happy,                            :conditions => {:feeling => "happy"       }
+  named_scope :recent,                           :order      => "created_at DESC"
 
-  named_scope :about, lambda {|mock| {:conditions => {:mock_id => mock.id}}}
-  named_scope :by, lambda {|author| {:conditions => {:author_id => author.id}}}
-  named_scope :happy, :conditions => {:feeling => "happy"}
-  named_scope :in_reply_to, lambda {|parent_id|
-    {:conditions => {:parent_id => parent_id}}
-  }
-  named_scope :recent, :order => "created_at DESC"
-  named_scope :sad, :conditions => {:feeling => "sad"}
-  named_scope :since, lambda {|time|
-    {:conditions => ["created_at >= ?", time]}
-  }
-
-  validates_presence_of :text, :if => Proc.new { |comment|
-      comment.parent
-    }
   validates_presence_of :author
-  validates_presence_of :feeling, :if => Proc.new { |comment|
-      comment.parent.nil? && comment.text.blank?
-    }
+  validates_presence_of :text, :if => Proc.new { |comment| comment.parent }
+  validates_presence_of :feeling, :if => Proc.new { |comment| comment.parent.nil? && comment.text.blank? }
+
+  before_validation :truncate_text_if_necessary
+
 
   def siblings
     self.parent_id ? self.parent.children : []
   end
 
-  before_validation :truncate_text_if_necessary
-
   def truncate_text_if_necessary
-    self.text = self.text[0, MAX_COMMENT_LENGTH]
-  end
-
-  after_create do |comment|
-    puts "Checking for new comments to email out"
-    discussions = MockView.discussions_relevant_to(comment)
-    discussions.each do |discussion|
-      discussion.reply_count += 1
-      discussion.last_replied_at = comment.created_at
-      discussion.save!
-    end
-    if comment.recipient_emails.any?
-      begin
-        Notifier.deliver_new_comment(comment)
-      rescue Exception => e
-        puts "FAILED TO DELIVER NEW COMMENT!"
-        puts e.inspect
-        # TODO: hook up hoptoad and fix it
-        # Not sure why this happens.
-      end
-    else
-      puts "There aren't any recipients for the email"
-    end
+    max_comment_length = 2_000 
+    self.text = self.text[0, max_comment_length]
   end
 
   def box_attribute
-    if x && y && width && height
-      "box=\"#{x}_#{y}_#{width}_#{height}\""
-    else
-      ""
-    end
+    "box=\"#{x}_#{y}_#{width}_#{height}\"" if x && y && width && height
   end
 
   def self.basic_feelings
@@ -106,11 +68,9 @@ class Comment < ActiveRecord::Base
   end
 
   def subscriber_emails
-    if self.parent_id
-      ([self.parent] + self.siblings).map(&:author).uniq.map(&:email)
-    else
-      [self.mock.author.email].compact
-    end
+    emails = []
+    emails = ([self.parent] + self.siblings).collect(&:author).collect(&:email).uniq if self.parent_id
+    emails += [self.mock.author.email].compact
   end
 
   def has_selection?
