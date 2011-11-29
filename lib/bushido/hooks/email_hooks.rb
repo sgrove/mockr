@@ -36,7 +36,7 @@ class BushidoEmailHooks < Bushido::EventObserver
                              :description => params['mail']['stripped-text'],
                              :mock_list   => mock_list,
                              :author_id   => User.find_by_email(params['from_email']) || User.find(1).id,
-                             :image       => params['attachments'].first,
+                             :image       => params['mail']['attachments'].first,
                              :path        => "")
       puts "finished!"
       puts mock.inspect
