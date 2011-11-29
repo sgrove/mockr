@@ -17,6 +17,8 @@ class Comment < ActiveRecord::Base
   validates_presence_of :text, :if => Proc.new { |comment| comment.parent }
   validates_presence_of :feeling, :if => Proc.new { |comment| comment.parent.nil? && comment.text.blank? }
 
+  attr_accessible :author_id, :parent_id, :text, :mock_id
+
   before_validation :truncate_text_if_necessary
 
 
