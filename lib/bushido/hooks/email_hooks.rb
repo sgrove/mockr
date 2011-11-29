@@ -4,7 +4,7 @@ class BushidoEmailHooks < Bushido::EventObserver
     parent = Comment.find(params['parent_comment_id'])
     author = User.find_by_email(params['from_email']) || User.first
 
-    Comment.create!(:author_id => author.id, :parent_id => parent_comment.id, :text => params['mail']['stripped-text'], :mock_id => mock.id)
+    Comment.create!(:author_id => author.id, :parent_id => parent.id, :text => params['mail']['stripped-text'], :mock_id => mock.id)
   end
 
   def mail_new_mock
