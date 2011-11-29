@@ -28,7 +28,7 @@ class Notifier < ActionMailer::Base
     host = self.class.default_url_options[:host]
 
     from REPLY_TO
-    recipients ||= Setting[:notification_email] || User.find(1).email
+    recipients ||= Setting[:notification_email] || mock.author.email
     reply_to REPLY_TO
     subject mock_subject(mock)
     recipients recipients

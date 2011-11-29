@@ -16,6 +16,7 @@ class Mock < ActiveRecord::Base
                     :url            => "/store/:attachment/:id/:style/:basename.:extension",
                     :path           => "#{ENV['S3_PREFIX']}/:attachment_:id_:style_:basename.:extension"
 
+  attr_accessible :title, :description, :mock_list, :author_id, :image, :path
 
   validates_presence_of :author, :image_file_name, :mock_list, :version
 

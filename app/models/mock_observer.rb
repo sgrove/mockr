@@ -1,5 +1,9 @@
 class MockObserver < ActiveRecord::Observer
 
+  def after_create(mock)
+    notify_users(mock)
+  end
+
   def after_update(mock)
     notify_users(mock)
   end
