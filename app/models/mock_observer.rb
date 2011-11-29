@@ -10,7 +10,7 @@ class MockObserver < ActiveRecord::Observer
 
   private
   
-  def notifiy_users(mock)
+  def notify_users(mock)
     Notifier.deliver_new_mock(self)
   end
 end
