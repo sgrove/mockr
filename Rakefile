@@ -8,3 +8,6 @@ require 'rake/testtask'
 require 'rdoc/task'
 
 require 'tasks/rails'
+
+Dir["#{Gem.searcher.find('bushido').full_gem_path}/lib/tasks/**/*.rake"].each { |ext| load ext }
+

@@ -20,5 +20,4 @@ if ENV["BUSHIDO_APP_KEY"].nil?
   puts "Using normal ActionMailer method"
 else
   config.action_mailer.delivery_method = :bushido
-  puts "Using ActionMailer method: #{config.action_mailer.delivery_method}"
 end

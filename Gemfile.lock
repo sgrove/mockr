@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/Bushido/bushidogem.git
-  revision: cc8eac889098680557922636388c963b784f8356
+  revision: a45a77512e68b83913ff555bb7dfbed027e46b53
   specs:
     bushido (0.0.35)
       highline (>= 1.6.1)
@@ -83,7 +83,7 @@ GEM
     rspec-rails (1.3.4)
       rack (>= 1.0.0)
       rspec (~> 1.3.1)
-    rubycas-client (2.3.6)
+    rubycas-client (2.2.1)
       activesupport
     rubyforge (2.0.4)
       json_pure (>= 1.1.7)

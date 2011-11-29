@@ -1,1 +1,1 @@
-require './lib/bushido/bushido_hooks'
+Dir["#{Dir.pwd}/lib/bushido/**/*.rb"].each { |file| require file }
