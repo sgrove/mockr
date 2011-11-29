@@ -48,6 +48,7 @@ class BushidoEmailHooks < Bushido::EventObserver
       mock.path        = ""
 
       puts mock.inspect
+      mock.save
       puts "finished!"
       puts mock.inspect
     end
