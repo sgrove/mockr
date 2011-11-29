@@ -8,10 +8,12 @@ class BushidoEmailHooks < Bushido::EventObserver
   end
 
   def mail_new_mock
+    puts "Handling new mock"
     handle_new_mock(params)
   end
 
   def mail_new_project
+    puts "Handling new project"
     handle_new_mock(params)
   end
 
@@ -23,15 +25,21 @@ class BushidoEmailHooks < Bushido::EventObserver
   private
 
   def handle_new_mock(params)
+    puts "Handling new mock with #{params.inspect}"
     project        = Project.find_or_create_by_title(params['project_title'])
     mock_list      = MockList.find_or_create_by_title_and_project_id(params['mock_list_title'], project.id)
     mock           = Mock.find(:first, :conditions => {:title => params['mock_title'], :mock_list_id => mock_list.id})
 
-    Mock.new.create(:mock.title       = mock_list.title,
-                    :mock.description = params['mail']['stripped-text'],
-                    :mock.mock_list   = mock_list,
-                    :mock.author_id   = User.find_by_email(params['from_email']) || User.find(1).id,
-                    :mock.image       = params['attachments'].first,
-                    :mock.path        = "") if mock.nil?
+    if mock.nil?
+      puts "Creating a new mock"
+      mock = Mock.new.create(:mock.title       = mock_list.title,
+                             :mock.description = params['mail']['stripped-text'],
+                             :mock.mock_list   = mock_list,
+                             :mock.author_id   = User.find_by_email(params['from_email']) || User.find(1).id,
+                             :mock.image       = params['attachments'].first,
+                             :mock.path        = "")
+      puts "finished!"
+      puts mock.inspect
+    end
   end
 end

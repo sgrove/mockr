@@ -1,4 +1,7 @@
 class CollaboratorsController < ApplicationController
+
+  before_filter :authenticate_user!
+
   def create
     begin
       Bushido::User.invite(params[:email])
@@ -15,7 +18,7 @@ class CollaboratorsController < ApplicationController
   def destroy
     user = User.find(params[:id])
     Bushido::User.remove(user.ido_id)
-    flash[:notice] = "Access to #{user.name} has been revoked!"
+    flash[:notice] = "Access for #{user.name} has been revoked!"
     user.destroy
     redirect_to collaborators_path
   end
