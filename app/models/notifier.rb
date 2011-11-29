@@ -45,7 +45,7 @@ class Notifier < ActionMailer::Base
     # Use the comment's parent id if it's present
     comment_id = (comment.parent_id || comment.id) if comment
 
-    base = "#{mock.project.title}: #{mock.mock_list.title} ##{mock.id}"
+    base = "#{mock.project.title}: #{mock.mock_list.title} ##{mock.version}"
     base += " comment #{comment_id}" if comment_id
     base
   end  
