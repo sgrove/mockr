@@ -27,9 +27,10 @@ class BushidoEmailHooks < Bushido::EventObserver
   def handle_new_mock(params)
     puts "Handling new mock with #{params.inspect}"
     project        = Project.find_or_create_by_title(params['project_title'])
-    mock_list      = MockList.find_or_create_by_title_and_project_id(params['mock_list_title'], project.id)
+    mock_list      = MockList.find_or_create_by_title_and_project_id(params['mock_title'], project.id)
     mock           = Mock.find(:first, :conditions => {:title => params['mock_title'], :mock_list_id => mock_list.id})
 
+    puts 
     if mock.nil?
       puts "Creating a new mock"
       # mock = Mock.create(:title       => mock_list.title,
