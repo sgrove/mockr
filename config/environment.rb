@@ -40,12 +40,13 @@ Rails::Initializer.run do |config|
   # If you change this key, all old sessions will become invalid!
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
-  
-  #config.action_controller.session = {
-  #  :key => '_mockr_session',
-  #  :secret      => '21ee28b973e26bef6f112ae1807d3ff3eafeebadb1f0ccf70b098451ba139e24d5de6508045291bcca481317969c3852241ed097c1d2431d80407e268f74731e',
-  #  :session_expires => Time.now + 31557600 #1.year not yet defined
-  #}
+
+  puts "BUSHIDO_NAME: #{ENV['BUSHIDO_NAME']}"
+  config.action_controller.session = {
+    :key             => "_#{ENV['BUSHIDO_NAME']}_mockr_session",
+    :secret          => "_#{ENV['BUSHIDO_SALT']}",
+    :session_expires => Time.now + 31557600 #1.year not yet defined
+  }
 
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
