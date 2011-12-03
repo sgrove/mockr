@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/Bushido/devise_cas_authenticatable.git
-  revision: 417a27b5e51b2bd45dd87e638ea84ec5958319a8
+  revision: 486b4ac0d5ad9d822dc2ab2abf65ece3c2e6f684
   specs:
     devise_bushido_authenticatable (1.0.0)
       devise
