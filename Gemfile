@@ -29,6 +29,8 @@ group :development do
   gem 'rspec-rails', "1.3.4"
   gem 'remarkable_activerecord'
   gem 'remarkable_rails'
+  gem 'tane', :git => "git://github.com/Bushido/tane.git"
+  gem 'awesome_print'
 end
 
 
