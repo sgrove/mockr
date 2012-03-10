@@ -1,31 +1,3 @@
-GIT
-  remote: git://github.com/Bushido/bushidogem.git
-  revision: 9e4302809f8f21db5d59542501e49ac47d8ba886
-  specs:
-    bushido (0.0.35)
-      highline (>= 1.6.1)
-      json (>= 1.4.6)
-      orm_adapter (~> 0.0.3)
-      rest-client (>= 1.6.1)
-
-GIT
-  remote: git://github.com/Bushido/devise_cas_authenticatable.git
-  revision: 486b4ac0d5ad9d822dc2ab2abf65ece3c2e6f684
-  specs:
-    devise_bushido_authenticatable (1.0.0)
-      devise
-      devise (>= 1.0.6)
-      rubycas-client (>= 2.2.1)
-
-GIT
-  remote: git://github.com/Bushido/tane.git
-  revision: 869cd7254a0c3e6063c274af2839ceef151f147d
-  specs:
-    tane (0.0.1)
-      erubis
-      highline
-      rest-client
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -46,21 +18,28 @@ GEM
       mime-types
       xml-simple
     builder (3.0.0)
+    bushido (0.0.36)
+      highline (>= 1.6.1)
+      json (>= 1.4.6)
+      orm_adapter (~> 0.0.3)
+      rest-client (>= 1.6.1)
     cocaine (0.2.0)
     daemons (1.1.4)
     devise (1.0.9)
       warden (~> 0.10.3)
-    erubis (2.7.0)
+    devise_bushido_authenticatable (1.0.1)
+      devise (>= 1.0.6)
+      rubycas-client (>= 2.2.1)
     eventmachine (0.12.10)
     factory_girl (1.2.4)
-    highline (1.6.8)
+    highline (1.6.11)
     hoe (1.5.3)
       rake (>= 0.8.1)
       rubyforge (>= 1.0.0)
     json (1.6.2)
     json_pure (1.6.2)
     mime-types (1.17.2)
-    orm_adapter (0.0.5)
+    orm_adapter (0.0.6)
     paperclip (2.4.5)
       activerecord (>= 2.3.0)
       activesupport (>= 2.3.2)
@@ -94,7 +73,7 @@ GEM
     rspec-rails (1.3.4)
       rack (>= 1.0.0)
       rspec (~> 1.3.1)
-    rubycas-client (2.2.1)
+    rubycas-client (2.3.8)
       activesupport
     rubyforge (2.0.4)
       json_pure (>= 1.1.7)
@@ -115,9 +94,9 @@ DEPENDENCIES
   action_mailer_tls
   awesome_print
   aws-s3
-  bushido!
+  bushido
   devise (= 1.0.9)
-  devise_bushido_authenticatable!
+  devise_bushido_authenticatable
   factory_girl (= 1.2.4)
   hoe (~> 1.5.1)
   json
@@ -130,6 +109,5 @@ DEPENDENCIES
   remarkable_rails
   rmagick
   rspec-rails (= 1.3.4)
-  tane!
   test-unit (= 1.2.3)
   thin (>= 1.2.7)

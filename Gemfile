@@ -8,7 +8,7 @@ gem 'pg'
 
 # User auth
 gem "devise", "1.0.9"
-gem 'devise_bushido_authenticatable', :git=>"git://github.com/Bushido/devise_cas_authenticatable.git"
+gem 'devise_bushido_authenticatable'
 
 # Image processing and storage
 gem 'rmagick', :require => "RMagick"
@@ -16,7 +16,7 @@ gem 'paperclip'
 gem 'aws-s3'
 
 # Misc.
-gem 'bushido', :git => "git://github.com/Bushido/bushidogem.git"
+gem 'bushido'
 gem 'hoe', '~> 1.5.1' # Heroku's rubygems is too old for hoe 2.9.1 as of 28 Mar 2011
 gem 'json'
 gem 'action_mailer_tls'
@@ -29,7 +29,6 @@ group :development do
   gem 'rspec-rails', "1.3.4"
   gem 'remarkable_activerecord'
   gem 'remarkable_rails'
-  gem 'tane', :git => "git://github.com/Bushido/tane.git"
   gem 'awesome_print'
 end
 
